@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">    
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="container-1">
+            <div class="avatar-container">
+                <span class="avatar">{{avatar}}</span>
+                <span>{{user}}</span>
+            </div>
+            <form action="" method="post"  class="form-container">
+                {% csrf_token %}
+                <h3>Add Password</h3>
+                {{form}}    
+                {{message}}            
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div class="container-2">
+            {% for password in passwords %}
+            <div class="pwd-card">
+                <div>
+                    <p>{{password.domain_name}}</p>
+                    <p>{{password.password}}</p>
+                </div>
+                <a href="/delete-pwd/{{password.domain_name}}">delete</a>
+            </div>
+            {% endfor %}            
+        </div>
+
+    </div>    
+</body>
+</html>
